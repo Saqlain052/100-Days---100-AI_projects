@@ -1,14 +1,24 @@
-Ek AI-powered spam email detector jo pretrained BERT model use karta hai emails ko SPAM ya HAM (Normal) mein classify karne ke liye — bina koi training ke!
+# 🚀 100 Days of AI
 
-Demo
-🚨 [SPAM] 99.1% — WINNER!! You won $1000 cash prize. Call now!
-✅ [HAM]  98.7% — Hey, are you coming to the meeting tomorrow?
+## 📖 About
+This repository contains my 100 Days AI journey where I build real-world AI projects daily.
 
-Model
-mrm8488/bert-tiny-finetuned-sms-spam-detection
+## 🎯 Goals
+- Learn AI/ML concepts
+- Build real-world projects
+- Share progress publicly
 
-Kya seekha?
+## 📅 Progress
+| Day | Project |
+|-----|--------|
+| Day 1 | Spam Detection |
+| Day 2 | Coming Soon |
 
-✅ Hugging Face pipeline API
-✅ Pretrained model load karna
-✅ Text classification
+## 🛠 Tech Stack
+- Python
+- Machine Learning
+- NLP
+- Transformers
+
+## 📌 Author
+Saqlain (Saki)
