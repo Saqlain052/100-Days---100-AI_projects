@@ -22,3 +22,25 @@ This repository contains my 100 Days AI journey where I build real-world AI proj
 
 ## 📌 Author
 Saqlain (Saki)
+
+ ### 🧠 Toxicity Categories  
+- 🤬 Overall Toxicity  
+- 💀 Severe Toxicity  
+- 🤮 Obscene Language  
+- 😡 Threats  
+- 👊 Insults  
+- 🎯 Identity Attacks  
+
+### 🛠 Tech Stack  
+Python, Scikit-learn, Pandas, NumPy, NLP  
+
+### ⚙️ Workflow  
+Data → Text Cleaning → Feature Extraction (TF-IDF) → Multi-label Classification → Prediction  
+
+### 📊 Example  
+Input: "You are a stupid idiot, I will hurt you"  
+Output: Toxic 🤬 | Insult 👊 | Threat 😡  
+
+Input: "Great job, keep going!"  
+Output: Non-Toxic ✅  
+
