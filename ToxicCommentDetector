@@ -1,0 +1,91 @@
+import pandas as pd
+from detoxify import Detoxify
+
+print(" Model is loading...")
+model = Detoxify('original')
+print("Model is ready!")
+
+def analyze_single_comment():
+    comment = input("\n💬 Apna comment likho: ")
+
+    if comment.strip():
+        print("🔍 Analyzing...")
+        results = model.predict(comment)
+
+        toxicity = results['toxicity']
+
+        print("\n--- RESULT ---")
+        if toxicity > 0.7:
+            print("🚨 TOXIC")
+        elif toxicity > 0.3:
+            print("⚠️ SUSPICIOUS")
+        else:
+            print("✅ CLEAN")
+
+        print(f"Toxicity Score: {toxicity:.1%}")
+
+        dominant = max(results, key=results.get)
+        print(f"Main Category: {dominant.replace('_', ' ').title()}")
+
+        print("\n📊 Detailed Breakdown:")
+        for key, value in results.items():
+            print(f"{key}: {value:.1%}")
+    else:
+        print("⚠️ Kuch likho pehle!")
+
+def analyze_csv():
+    file_path = input("\n📂 CSV file ka path do (e.g., data.csv): ")
+
+    try:
+        df = pd.read_csv(file_path)
+        print(f"✅ File load ho gayi! {len(df)} comments mile.")
+
+        if 'comment' not in df.columns:
+            print("❌ 'comment' column missing hai!")
+            return
+
+        threshold = float(input("🎚️ Toxic threshold (0.1 - 0.9): ") or 0.5)
+
+        comments_list = df['comment'].astype(str).tolist()
+
+        print(f"⏳ {len(comments_list)} comments analyze ho rahe hain...")
+        results = model.predict(comments_list)
+
+        df['toxicity_score'] = results['toxicity']
+        df['status'] = df['toxicity_score'].apply(
+            lambda x: '🚨 TOXIC' if x > threshold else (
+                '⚠️ SUSPICIOUS' if x > threshold * 0.6 else '✅ CLEAN'
+            )
+        )
+
+        print("\n📊 Summary:")
+        toxic_count = (df['toxicity_score'] > threshold).sum()
+        print(f"Total: {len(df)}")
+        print(f"Toxic: {toxic_count}")
+        print(f"Clean: {len(df) - toxic_count}")
+        print(f"Toxic %: {toxic_count/len(df):.1%}")
+
+        output_file = "toxic_results.csv"
+        df.to_csv(output_file, index=False)
+        print(f"\n📥 Results saved as {output_file}")
+
+    except Exception as e:
+        print(f"❌ Error: {e}")
+
+while True:
+    print("\n====== TOXIC COMMENT DETECTOR ======")
+    print("1. Single Comment Analyze")
+    print("2. CSV File Analyze")
+    print("3. Exit")
+
+    choice = input("👉 Option choose karo: ")
+
+    if choice == '1':
+        analyze_single_comment()
+    elif choice == '2':
+        analyze_csv()
+    elif choice == '3':
+        print("👋 Exit ho raha hai...")
+        break
+    else:
+        print("❌ Invalid option!")
