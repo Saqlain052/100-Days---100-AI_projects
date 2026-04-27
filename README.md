@@ -48,5 +48,63 @@ Input: "You are a stupid idiot, I will hurt you"
 Output: Toxic 🤬 | Insult 👊 | Threat 😡  
 
 Input: "Great job, keep going!"  
-Output: Non-Toxic ✅  
+Output: Non-Toxic ✅ 
 
+# 📰 Day 3 — News Classifier
+
+> **Hugging Face 100 Tasks Roadmap | Saki Edition**
+
+---
+
+## 🚀 Project Overview
+This project automatically classifies news headlines into different categories using AI.
+
+It understands the text and predicts the most relevant category without any manual training data.
+
+---
+
+## 📌 Categories Supported
+- ⚽ Sports  
+- 🏛️ Politics  
+- 💻 Technology  
+- 💼 Business  
+- 🎬 Entertainment  
+
+---
+
+## 🧠 Key Concept — Zero-Shot Learning
+Unlike traditional ML models:
+
+### ❌ Normal Approach:
+- Dataset required  
+- Model training needed  
+- Time-consuming process  
+
+### ✅ Zero-Shot Approach:
+- Only provide categories  
+- Model understands context itself  
+- No training required ✨  
+
+---
+
+## ⚔️ Day Comparison
+
+| Feature        | Day 1 (Spam) | Day 2 (Toxic) | Day 3 (News) |
+|----------------|-------------|--------------|--------------|
+| Task Type      | Binary      | Multi-label  | Multi-class  |
+| Model          | DistilBERT  | Detoxify     | BART-MNLI    |
+| Special Feature | Classification | Toxic Score | **Zero-Shot AI** |
+
+---
+
+## 🛠️ Tech Stack
+- 🤗 Hugging Face Transformers (BART-MNLI)
+- 🐍 Python
+- 📊 Pandas
+
+---
+
+## ⚙️ Installation
+
+```bash
+pip install transformers torch pandas
