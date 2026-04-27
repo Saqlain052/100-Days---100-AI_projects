@@ -6,42 +6,42 @@ model = Detoxify('original')
 print("Model is ready!")
 
 def analyze_single_comment():
-    comment = input("\n💬 Apna comment likho: ")
+    comment = input("\n Write your comment: ")
 
     if comment.strip():
-        print("🔍 Analyzing...")
+        print(" Analyzing...")
         results = model.predict(comment)
 
         toxicity = results['toxicity']
 
         print("\n--- RESULT ---")
         if toxicity > 0.7:
-            print("🚨 TOXIC")
+            print(" TOXIC")
         elif toxicity > 0.3:
-            print("⚠️ SUSPICIOUS")
+            print(" SUSPICIOUS")
         else:
-            print("✅ CLEAN")
+            print("CLEAN")
 
         print(f"Toxicity Score: {toxicity:.1%}")
 
         dominant = max(results, key=results.get)
         print(f"Main Category: {dominant.replace('_', ' ').title()}")
 
-        print("\n📊 Detailed Breakdown:")
+        print("\n Detailed Breakdown:")
         for key, value in results.items():
             print(f"{key}: {value:.1%}")
     else:
-        print("⚠️ Kuch likho pehle!")
+        print(" Something write please!")
 
 def analyze_csv():
-    file_path = input("\n📂 CSV file ka path do (e.g., data.csv): ")
+    file_path = input("\n CSV file ka path do (e.g., data.csv): ")
 
     try:
         df = pd.read_csv(file_path)
-        print(f"✅ File load ho gayi! {len(df)} comments mile.")
+        print(f"File load ho gayi! {len(df)} comments mile.")
 
         if 'comment' not in df.columns:
-            print("❌ 'comment' column missing hai!")
+            print(" 'comment' column missing hai!")
             return
 
         threshold = float(input("🎚️ Toxic threshold (0.1 - 0.9): ") or 0.5)
