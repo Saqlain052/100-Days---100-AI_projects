@@ -1,0 +1,62 @@
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+
+print("Model loading...")
+tokenizer = AutoTokenizer.from_pretrained("sshleifer/distilbart-cnn-12-6")
+model = AutoModelForSeq2SeqLM.from_pretrained("sshleifer/distilbart-cnn-12-6")
+print("Model loaded\n")
+
+length_sets = {
+    "short": {"max_length": 80, "min_length": 20},
+    "medium": {"max_length": 120, "min_length": 40},
+    "long": {"max_length": 200, "min_length": 50},
+}
+
+def text_summarizer(text, length="medium"):
+
+    word_count = len(text.split())
+
+    if word_count < 30:
+        print("Text is too short (minimum 30 words required)")
+        return text
+
+    if length not in length_sets:
+        print("Invalid length, using default medium")
+        length = "medium"
+
+    preset = length_sets[length]
+
+    # Tokenize the input text
+    inputs = tokenizer([text], max_length=1024, return_tensors="pt", truncation=True)
+
+    # Generate summary using the model's generate method
+    # num_beams=4 is a common setting for summarization for better quality
+    # early_stopping=True stops generation once all beam hypotheses have met minimum length criteria
+    summary_ids = model.generate(
+        inputs["input_ids"],
+        num_beams=4,
+        max_length=preset["max_length"],
+        min_length=preset["min_length"],
+        early_stopping=True
+    )
+
+    # Decode the generated summary IDs back to text
+    summary = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
+
+    summary_words = len(summary.split())
+    reduction = (1 - summary_words / word_count) * 100
+
+    print("----------------------------------------")
+    print("Original words:", word_count)
+    print("Summary words:", summary_words)
+    print("Reduction percentage:", round(reduction, 2))
+    print("\nSummary:")
+    print("-"*20)
+    print(summary)
+    print("----------------------------------------")
+
+    return summary
+
+
+text = """In the modern digital era, the rapid growth of technology has fundamentally transformed the way humans live, work, and communicate with one another. Every day, billions of people interact with digital platforms that generate massive amounts of data, ranging from social media posts and online transactions to scientific research and global news updates. This creates both opportunities and challenges in managing information effectively."""
+
+text_summarizer(text, "medium")

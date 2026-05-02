@@ -108,3 +108,150 @@ Unlike traditional ML models:
 
 ```bash
 pip install transformers torch pandas
+
+# 🌐 Urdu ↔ English Translator (CSV Supported)
+
+## 📌 Overview
+
+This project is a simple **Urdu ↔ English translation system** built using Hugging Face Transformers.
+It allows you to:
+
+* Translate individual sentences
+* Translate entire CSV files (bulk translation)
+
+---
+
+## 🚀 Features
+
+* 🔁 Urdu to English translation
+* 🔁 English to Urdu translation
+* 📄 CSV file support (bulk processing)
+* ⚡ Clean and simple implementation
+
+---
+
+## 🛠️ Technologies Used
+
+* Python
+* Transformers (Hugging Face)
+* Pandas
+
+---
+
+## 📦 Installation
+
+```bash
+pip install transformers pandas sacremoses torch
+```
+
+---
+
+## 📂 Project Structure
+
+```
+project/
+│── main.py
+│── sample_translations.csv
+│── sample_translations_translated.csv (output)
+```
+
+---
+
+## 📄 Input CSV Format
+
+Your CSV file should contain:
+
+```csv
+id,urdu_text,english_text
+1,پاکستان ایک خوبصورت ملک ہے, Pakistan is a beautiful country
+2,مجھے پروگرامنگ پسند ہے, I love programming
+```
+
+---
+
+## ▶️ How to Run
+
+```bash
+python main.py
+```
+
+---
+
+## ⚙️ How It Works
+
+1. Loads pre-trained translation models
+2. Reads CSV file
+3. Translates:
+
+   * `urdu_text` → English
+   * `english_text` → Urdu
+4. Saves output in a new CSV file
+
+---
+
+## 📤 Output
+
+A new file will be generated:
+
+```
+sample_translations_translated.csv
+```
+
+With extra columns:
+
+* `urdu_translated`
+* `english_translated`
+
+---
+
+## 🧠 Example Output
+
+| urdu_text  | english_text | urdu_translated | english_translated |
+| ---------- | ------------ | --------------- | ------------------ |
+| پاکستان... | Pakistan...  | Pakistan...     | پاکستان...         |
+
+---
+
+## ⚠️ Notes
+
+* First run may take time (model download)
+* Large files may take longer to process
+* GPU can speed up translation
+
+---
+
+## 🎯 Future Improvements
+
+* Streamlit Web App
+* Batch Processing (faster)
+* Language Auto Detection
+* API Deployment
+
+---
+
+## 👨‍💻 Author
+
+**Saqlain (Saki)**
+AI Enthusiast | Future AI Engineer 🚀
+
+---
+
+# Text Summarizer using Transformers
+
+## Overview
+This project is a simple text summarization tool built using Hugging Face Transformers. It uses the model `sshleifer/distilbart-cnn-12-6` to generate concise summaries from long text.
+
+## Model Used
+- sshleifer/distilbart-cnn-12-6
+
+## Features
+- Summarizes long text into short, medium, or long versions
+- Uses pre-trained transformer model
+- Calculates word reduction percentage
+- Simple and easy to use function
+
+## Requirements
+Install dependencies before running the project:
+
+```bash
+pip install transformers torch
