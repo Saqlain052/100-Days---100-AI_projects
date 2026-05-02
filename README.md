@@ -236,7 +236,7 @@ AI Enthusiast | Future AI Engineer 🚀
 
 ---
 
-# Text Summarizer using Transformers
+# Day 5: Text Summarizer using Transformers
 
 ## Overview
 This project is a simple text summarization tool built using Hugging Face Transformers. It uses the model `sshleifer/distilbart-cnn-12-6` to generate concise summaries from long text.
